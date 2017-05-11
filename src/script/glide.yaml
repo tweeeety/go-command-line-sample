@@ -1,0 +1,6 @@
+package: script
+import:
+- package: github.com/urfave/cli
+- package: golang.org/x/net
+  subpackages:
+  - context

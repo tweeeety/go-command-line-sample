@@ -1,0 +1,10 @@
+hash: b94b745cf745ba30ce8054b5868094f514460a904c2c1ddac09d0787eed6fd00
+updated: 2017-05-11T22:38:00.398264515+09:00
+imports:
+- name: github.com/urfave/cli
+  version: d70f47eeca3afd795160003bc6e28b001d60c67c
+- name: golang.org/x/net
+  version: c9b681d35165f1995d6f3034e61f8761d4b90c99
+  subpackages:
+  - context
+testImports: []
