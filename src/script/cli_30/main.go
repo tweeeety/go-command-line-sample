@@ -9,8 +9,8 @@ import (
 
 func main() {
 	app := cli.NewApp()
-	app.Name = "cli_03"
-	app.Usage = "cli_03 sample"
+	app.Name = "cli_30"
+	app.Usage = "cli_30 sample"
 	app.Version = "1.2.1"
 
 	os.Setenv("SAMPLE_ENV", "sample env dayo")
