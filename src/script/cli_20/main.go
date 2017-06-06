@@ -29,10 +29,10 @@ func main() {
 		fmt.Printf("c.Args()[0]     : %+v\n", c.Args()[0])
 		fmt.Printf("c.String()      : %+v\n", c.String("game"))
 
-		// ここでHelp表示
+		// Help表示
 		//cli.ShowAppHelp(c)
 
-		// ここでversionを表示
+		// versionを表示
 		cli.ShowVersion(c)
 
 		return nil
@@ -44,7 +44,7 @@ func main() {
 		return nil
 	}
 
-	app.HideHelp = false
+	app.HideHelp = true
 
 	app.Run(os.Args)
 }
