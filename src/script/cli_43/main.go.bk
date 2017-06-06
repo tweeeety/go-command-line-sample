@@ -1,0 +1,106 @@
+package main
+
+import (
+	"fmt"
+	"os"
+
+	"github.com/urfave/cli"
+)
+
+func main() {
+	app := cli.NewApp()
+	app.Name = "cli_41"
+	app.Usage = "cli_41 sample"
+
+	// flags
+	app.Flags = []cli.Flag{
+		cli.StringFlag{
+			Name:  "lang, l",
+			Value: "english",
+			Usage: "language for the greeting",
+		},
+	}
+
+	// before
+	app.Before = func(c *cli.Context) error {
+		fmt.Println("-- Before --")
+		return nil
+	}
+
+	// command action
+	app.Commands = []cli.Command{
+		// `go run cli_04/main.go add パラメータ`でactionするコマンド
+		{
+			Name:    "add",
+			Aliases: []string{"a"},
+			Usage:   "add a task to the list",
+			Action: func(c *cli.Context) error {
+				fmt.Println("added task: ", c.Args().First())
+				return nil
+			},
+		},
+		// `go run cli_04/main.go complete パラメータ`でactionするコマンド
+		{
+			Name:    "complete",
+			Aliases: []string{"c"},
+			Usage:   "complete a task on the list",
+			Action: func(c *cli.Context) error {
+				fmt.Println("completed task: ", c.Args().First())
+				return nil
+			},
+		},
+		{
+			Name:    "template",
+			Aliases: []string{"t"},
+			Usage:   "options for task templates",
+			Subcommands: []cli.Command{
+				// `go run cli_04/main.go template add パラメータ`でactionするコマンド
+				{
+					Name:  "add",
+					Usage: "add a new template",
+					Action: func(c *cli.Context) error {
+						fmt.Println("new task template: ", c.Args().First())
+						return nil
+					},
+				},
+				// `go run cli_04/main.go template remove パラメータ`でactionするコマンド
+				{
+					Name:  "remove",
+					Usage: "remove an existing template",
+					Action: func(c *cli.Context) error {
+						fmt.Println("removed task template: ", c.Args().First())
+						return nil
+					},
+				},
+			},
+		},
+		{
+			Name:    "sample",
+			Aliases: []string{"s"},
+			Usage:   "sample task",
+			Action: func(c *cli.Context) error {
+				fmt.Println("-- Sample Action --")
+
+				fmt.Printf("c.Command.FullName()       : %+v\n", c.Command.FullName())
+				fmt.Printf("c.Command.HasName(\"sample\")   : %+v\n", c.Command.HasName("sample"))
+				fmt.Printf("c.Command.Names()          : %+v\n", c.Command.Names())
+				fmt.Printf("c.Command.VisibleFlags()   : %+v\n", c.Command.VisibleFlags())
+
+				return nil
+			},
+		},
+	}
+
+	// action
+	app.Action = func(c *cli.Context) error {
+		fmt.Println("-- Nomal Action --")
+		return nil
+	}
+
+	// after
+	app.After = func(c *cli.Context) error {
+		fmt.Println("-- After --")
+		return nil
+	}
+	app.Run(os.Args)
+}
